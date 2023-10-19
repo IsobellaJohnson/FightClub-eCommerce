@@ -10,11 +10,14 @@
       h1 {
         flex: 2;
         text-transform: capitalize;
+        font-family: 'Bebas Neue', sans-serif;
       }
   
       p{
         flex:3;
-        color:gray
+        color:gray;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
       }
     }
   
