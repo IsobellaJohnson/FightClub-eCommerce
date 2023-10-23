@@ -7,7 +7,7 @@ import "./Products.scss";
 
 const Products = () => {
   const catId = parseInt(useParams().id);
-  const [maxPrice, setMaxPrice] = useState(1000);
+  const [maxPrice, setMaxPrice] = useState(250);
   const [sort, setSort] = useState('desc');
   const [selected, setSelected] = useState([]);
 
@@ -26,7 +26,6 @@ const Products = () => {
         : selected.filter((item) => item !== value) //handle uncheck -- remove item from array wehn unchecked
     );
   };
-
 
   return (
     <div className="products">
@@ -51,8 +50,8 @@ const Products = () => {
             <span>0</span>
             <input
               type="range"
-              min={0}
-              max={1000}
+              min={60}
+              max={250}
               onChange={(e) => setMaxPrice(e.target.value)}
             />
             <span>{maxPrice}</span>

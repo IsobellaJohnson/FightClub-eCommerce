@@ -1,38 +1,38 @@
 import React from "react";
 import "./Cart.scss"
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined"
+import {useSelector, useDispatch} from "react-redux"
+import {removeItem} from "../../redux/cartReducer"
+
 
 const Cart = () => {
+const products = useSelector(state => state.cart.products)
+const dispatch = useDispatch();
 
-    const data = [
-        {
-            id: 1,
-            img: "/img/gloves.jpeg",
-            img2: "/img/mouthguard.jpeg",
-            title: "Brown Vintage Boxing Gloves",
-            desc: "Vintage brown boxing gloves made with hand-crafted leather in 1982. Original condition. Minimal wear and tear",
-            isNew: false,
-            oldPrice: 29,
-            price: 19,
-        }
-    ]
+const totalPrice = () => {
+    let total = 0;
+    products.forEach((item) => {
+      total += item.quantity * item.price;
+    });
+    return total.toFixed(2);
+  };
     return(
         <div className="cart">
             <h1>Products in your cart</h1>
-            {data?.map(item=>(
+            {products?.map(item=>(
             <div className="item" key={item.id}>
-                <img src={item.img} alt="" />
+                <img src={process.env.REACT_APP_UPLOAD_URL + item.img} alt="" />
                 <div className="details">
                     <h1>{item.title}</h1>
                     <p>{item.desc?.substring(0,100)}</p>
-                    <div className="price">1 x ${item.price}</div>
+                    <div className="price">{item.quantity} x ${item.price}</div>
                 </div>
-                <DeleteOutlinedIcon className="delete"/>
+                <DeleteOutlinedIcon className="delete" onClick={()=>dispatch(removeItem(item.id))}/>
             </div>
             ))}
             <div className="total">
                 <span>SUBTOTAL</span>
-                <span>$123</span>
+            <span>${totalPrice()}</span>
             </div>
             <button>PROCEED TO CHECKOUT</button>
             <span className="reset">Reset Cart</span>

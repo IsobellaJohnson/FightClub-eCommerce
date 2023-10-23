@@ -33,7 +33,11 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    font-family: 'Roboto', sans-serif;
 
+    .title{
+      font-family: 'Bebas Neue', sans-serif !important;
+    }
     .price{
       font-size: 30px;
       color: darkred;
